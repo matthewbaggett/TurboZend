@@ -1,0 +1,98 @@
+@import "common.less";
+
+.cblock-editor{
+	width: 900px;
+	.float;
+	.pane{
+		width: 900px;
+		.float;
+		border: 1px solid @base;
+		clear: both;
+	}
+	.editor{
+		.float;
+		.cblock{
+			border: 1px solid spin(@base, -90);
+			background-color: fadeout(spin(@base, -90),80%);
+			margin: 15px;
+			.float;
+			clear: both;
+			width: 868px;
+			div.heading{
+				border-bottom-color: spin(@base,-90);
+				background-color: fadeout(spin(@base,-90),50%);
+			}
+			.gblock{
+				border: 1px solid spin(@base,90);
+				background-color: fadeout(spin(@base, 90),80%);
+				.float;
+				margin: 15px;
+				clear: both;
+				width: 836px;
+				div.heading{
+					border-bottom-color: spin(@base,90);
+					background-color: fadeout(spin(@base,90),50%);
+				}
+				.inner{
+					padding: 15px;
+					.float;
+					width: 794px;
+					.formrow{
+						xwidth: 100%;
+						.float;
+						clear: both;
+						border: 1px solid spin(@base,90);
+						margin-bottom: 2px;
+						div.heading{
+							border-bottom-color: spin(@base,90);
+							background-color: fadeout(spin(@base,90),50%);
+						}
+						label{
+							.float;
+							margin-right: 5px;
+							width: 150px;
+							text-align: right;
+							clear: left;
+						}
+						input,
+						textarea,
+						select{
+							.float;
+							padding-top: 0;
+							padding-bottom: 0;
+							border: 1px solid spin(@base,90);
+						}
+						textarea{
+							clear: left;
+							width: 782px;
+							height: 300px;
+							margin-left: 10px;
+							margin-right: 10px;
+						}
+					}
+				}
+			}
+		}
+		div.heading{
+			.float;
+			border-bottom: 1px solid @base;
+			background-color: fadeout(@base,50%);
+			color: white;
+		    width: 100%;
+		    ul{
+		    	.float;
+			    width: 100%;
+			    li{
+			    	.float;
+			    	margin-left: 15px;
+			    	&.right{
+			    		float: right;
+			    		margin-left: 0;
+			    		margin-right: 15px;
+			    		
+			    	}
+			    }
+		   	}
+		}
+	}
+}

@@ -1,0 +1,37 @@
+@base: #72C672;
+@accent: #F78E8E;
+
+@default_rounding: 5px;
+
+.rounded-corners-top-left (@radius: @default_rounding) {
+	-moz-border-radius-topleft: 			@radius;
+	-webkit-border-top-left-radius:  		@radius;
+	border-top-left-radius: 				@radius;
+}
+.rounded-corners-top-right (@radius: @default_rounding) {
+	-moz-border-radius-topright: 			@radius;
+	-webkit-border-top-right-radius: 		@radius;
+	border-top-right-radius: 				@radius;
+}
+.rounded-corners-bottom-right (@radius: @default_rounding) {
+	-moz-border-radius-bottomright: 		@radius;
+	-webkit-border-bottom-right-radius: 	@radius;
+	border-bottom-right-radius: 			@radius;
+}
+.rounded-corners-bottom-left (@radius: @default_rounding) {
+	-moz-border-radius-bottomleft: 			@radius;
+	-webkit-border-bottom-left-radius: 		@radius;
+	border-bottom-left-radius: 				@radius;
+}
+	
+.rounded-corners (@radius: @default_rounding) {
+	.rounded-corners-top-left(@radius);
+	.rounded-corners-top-right(@radius);
+	.rounded-corners-bottom-left(@radius);
+	.rounded-corners-bottom-right(@radius);
+}
+
+.float{
+	float: left;
+	display: block;
+}
