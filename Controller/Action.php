@@ -3,6 +3,13 @@
 class Turbo_Controller_Action extends Zend_Controller_Action
 {
 
+	private function _send_error_email($errors){
+		$mail = new Zend_Mail();
+        $mail->addTo(Zend_Registry::get('config')->site->exceptions_email);
+        $mail->setSubject("Exception! - ".date("Y-m-d H:i:s")." - {$this->view->message}");
+        $mail->setBodyText($_SERVER['HTTP_HOST']. $_SERVER['REQUEST_URI'] . "\n\n" . $errors->exception."\n\n\$_SERVER:\n".print_r($_SERVER,true)."\n\n\$_REQUEST:\n".print_r($_REQUEST,true));
+        $mail->send();
+	}
     public function errorAction()
     {
         $errors = $this->_getParam('error_handler');
@@ -32,12 +39,13 @@ class Turbo_Controller_Action extends Zend_Controller_Action
         if ($log = $this->getLog()) {
             $log->crit($this->view->message, $errors->exception);
         }
+        switch(true){
+        	case (stripos($_SERVER['HTTP_USER_AGENT'],'Googlebot') !== FALSE):
+        		break;
+        	default:
+        		$this->_send_error_email($errors);
+        }
         
-        $mail = new Zend_Mail();
-        $mail->addTo(Zend_Registry::get('config')->site->exceptions_email);
-        $mail->setSubject("Exception! - ".date("Y-m-d H:i:s")." - {$this->view->message}");
-        $mail->setBodyText($_SERVER['HTTP_HOST']. $_SERVER['REQUEST_URI'] . "\n\n" . $errors->exception."\n\n\$_SERVER:\n".print_r($_SERVER,true)."\n\n\$_REQUEST:\n".print_r($_REQUEST,true));
-        $mail->send();
         
         // conditionally display exceptions
         if ($this->getInvokeArg('displayExceptions') == true) {
