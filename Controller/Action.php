@@ -39,8 +39,11 @@ class Turbo_Controller_Action extends Zend_Controller_Action
         if ($log = $this->getLog()) {
             $log->crit($this->view->message, $errors->exception);
         }
+        
         switch(true){
+        	// Fucking Google & Baidu, exploding my email inbox..
         	case (stripos($_SERVER['HTTP_USER_AGENT'],'Googlebot') !== FALSE):
+        	case (stripos($_SERVER['HTTP_USER_AGENT'],'Baiduspider') !== FALSE):
         		break;
         	default:
         		$this->_send_error_email($errors);
