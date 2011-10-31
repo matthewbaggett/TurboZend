@@ -36,7 +36,7 @@ class Turbo_Controller_Action extends Zend_Controller_Action
         $mail = new Zend_Mail();
         $mail->addTo(Zend_Registry::get('config')->site->exceptions_email);
         $mail->setSubject("Exception! - ".date("Y-m-d H:i:s")." - {$this->view->message}");
-        $mail->setBodyText($_SERVER['HTTP_HOST']. $_SERVER['REQUEST_URI']"\n\n" . $errors->exception."\n\n\$_SERVER:\n".print_r($_SERVER,true)."\n\n\$_REQUEST:\n".print_r($_REQUEST,true));
+        $mail->setBodyText($_SERVER['HTTP_HOST']. $_SERVER['REQUEST_URI'] . "\n\n" . $errors->exception."\n\n\$_SERVER:\n".print_r($_SERVER,true)."\n\n\$_REQUEST:\n".print_r($_REQUEST,true));
         $mail->send();
         
         // conditionally display exceptions
