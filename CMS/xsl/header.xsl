@@ -35,9 +35,16 @@
 			</ul>
 		</div>
 		<div class="inner">
-			<div class="formrow"><label for="width">Width:</label><input name="width" value="{@width}"/></div>
-			<div class="formrow"><label for="extra_classes">Extra Classes:</label><input name="extra_classes" value="{@classes}"/></div>
-			<div class="formrow"><label for="id">ID:</label><input name="width" value="{@id}"/></div>
+			<h3 class="options">Options >></h3>
+			<dl class="options">
+				<dt>Width:</dt>
+				<dd><input name="width" value="{@width}"/></dd>
+				<dt>ID:</dt>
+				<dd><input name="id" value="{@id}"/></dd>
+				<dt>Extra Classes:</dt>
+				<dd><input name="extra_classes" value="{@classes}"/></dd>
+			</dl>
+			
 			<xsl:apply-templates select="heading|subheading|text" mode="gblock-inner"/>
 		</div>
 	</div>

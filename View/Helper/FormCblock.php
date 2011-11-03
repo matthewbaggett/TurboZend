@@ -43,8 +43,6 @@ class Zend_View_Helper_FormCblock extends Zend_View_Helper_FormElement
      */
     public function formCblock($name, $value = null, $attribs = null)
     {
-    	$this->view->headLink()->appendStylesheet("/css/cms-cblock.css");
-    	$this->view->headScript()->appendFile("/js/cms-cblock.js");
         $info = $this->_getInfo($name, $value, $attribs);
         extract($info); // name, value, attribs, options, listsep, disable
 
