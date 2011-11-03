@@ -25,6 +25,9 @@ class Turbo_Db_Table_Row_Base extends Zend_Db_Table_Row_Abstract{
 	}
 	
 	protected function __call_get_method($method){
+		if(!isset($this->variable_map)){
+			return FALSE;
+		}
 		if (preg_match('/^([get|set]+)_(.*)/', $method, $matches)) {
             $index  = null;
             $action = $matches[1];

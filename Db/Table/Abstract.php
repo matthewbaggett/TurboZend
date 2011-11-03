@@ -11,5 +11,6 @@ class Turbo_Db_Table_Abstract extends Zend_Db_Table_Abstract
 		$select->where('bolDeleted = 0');
 		return $select;
 	}
+	
 }
 
