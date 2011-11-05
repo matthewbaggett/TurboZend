@@ -1,6 +1,18 @@
 <?php 
 
 class Turbo_Db_Table_Row_Base extends Zend_Db_Table_Row_Abstract{
+	
+	public function toXML(){
+		$arr_name_elements = explode("_",get_class($this));
+		$str_singular = end($arr_name_elements);
+		$str_xml = "<{$str_singular}>\n";
+		foreach($this->toArray() as $key => $value){
+			$str_xml.= "<{$key}>{$value}</{$key}>\n";
+		}
+		$str_xml.= "</{$str_singular}>\n";
+		return $str_xml;
+	}
+	
 	public function delete(){
 		if(isset($this->bolDeleted)){
 			$this->bolDeleted = TRUE;
