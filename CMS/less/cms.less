@@ -52,18 +52,30 @@
 	ul.navigation{
 		.float;
 		width: 960px;
-		border-bottom: 1px solid lighten(@base, 5%);
+		
 		font-weight: 700;
+		&.primary{
+			border-bottom: 1px solid lighten(@base, 5%);
+			li{
+				
+				&:first-child{
+					.rounded-corners-top-left();
+					a{
+						.rounded-corners-top-left();
+					}
+				}
+			}
+		}
+		&.secondary{
+			li{
+				border-bottom: 1px solid lighten(@base, 5%);
+			}
+		}
 		li{
 			.float;
 			background-color: fadeout(lighten(@base, 32%), 60%);
 			border-right: 1px solid lighten(@base,5%);
-			&:first-child{
-				.rounded-corners-top-left();
-				a{
-					.rounded-corners-top-left();
-				}
-			}
+			
 			&.right{
 				border-right: 0;
 				border-left: 1px solid lighten(@base,5%);
