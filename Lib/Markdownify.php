@@ -55,7 +55,7 @@ define('MDFY_KEEPHTML', true);
 /**
  * HTML to Markdown converter class
  */
-class Markdownify {
+class Turbo_Lib_Markdownify {
   /**
    * html parser object
    *
@@ -116,7 +116,7 @@ class Markdownify {
    *             defaults to true (HTML will be kept)
    * @return void
    */
-  function Markdownify($linksAfterEachParagraph = MDFY_LINKS_EACH_PARAGRAPH, $bodyWidth = MDFY_BODYWIDTH, $keepHTML = MDFY_KEEPHTML) {
+  function __construct($linksAfterEachParagraph = MDFY_LINKS_EACH_PARAGRAPH, $bodyWidth = MDFY_BODYWIDTH, $keepHTML = MDFY_KEEPHTML) {
     $this->linksAfterEachParagraph = $linksAfterEachParagraph;
     $this->keepHTML = $keepHTML;
 
@@ -126,7 +126,7 @@ class Markdownify {
       $this->bodyWidth = false;
     }
 
-    $this->parser = new parseHTML;
+    $this->parser = new Turbo_Lib_ParseHTML();
     $this->parser->noTagsInCode = true;
 
     # we don't have to do this every time

@@ -1,6 +1,6 @@
 <?php
 /**
- * ParseHTML is a HTML parser which works with PHP 4 and above.
+ * Turbo_Lib_ParseHTML is a HTML parser which works with PHP 4 and above.
  * It tries to handle invalid HTML to some degree.
  *
  * @version 1.0 beta
@@ -22,7 +22,7 @@
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
  */
-class ParseHTML {
+class Turbo_Lib_ParseHTML {
   /**
    * tags which are always empty (<br /> etc.)
    *
@@ -527,7 +527,7 @@ class ParseHTML {
  * @return string
  */
 function indentHTML($html, $indent = "  ", $noTagsInCode = false) {
-  $parser = new ParseHTML;
+  $parser = new Turbo_Lib_ParseHTML;
   $parser->noTagsInCode = $noTagsInCode;
   $parser->html = $html;
   $html = '';
