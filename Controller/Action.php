@@ -1,6 +1,6 @@
 <?php
 
-class Turbo_Controller_Action extends Zend_Controller_Action
+class Turbo_Controller_Action extends LayoutController
 {
 
 	private function _send_error_email($errors){
