@@ -1,5 +1,5 @@
 <?php 
-class Application_Router_Cli extends Zend_Controller_Router_Abstract
+class Turbo_Router_Cli extends Zend_Controller_Router_Abstract
 {
     public function route (Zend_Controller_Request_Abstract $dispatcher)
     {

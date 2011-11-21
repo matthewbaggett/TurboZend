@@ -10,6 +10,7 @@ class Turbo_Controller_Action extends LayoutController
         $mail->setBodyText($_SERVER['HTTP_HOST']. $_SERVER['REQUEST_URI'] . "\n\n" . $errors->exception."\n\n\$_SERVER:\n".print_r($_SERVER,true)."\n\n\$_REQUEST:\n".print_r($_REQUEST,true));
         $mail->send();
 	}
+	
     public function errorAction()
     {
         $errors = $this->_getParam('error_handler');
@@ -66,6 +67,12 @@ class Turbo_Controller_Action extends LayoutController
         }
         $log = $bootstrap->getResource('Log');
         return $log;
+    }
+    
+    public function cliAction(){
+    	$errors = $this->_getParam('error_handler');
+    	echo $errors->exception;
+    	exit;
     }
 
 
