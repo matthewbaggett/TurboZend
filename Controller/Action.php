@@ -1,5 +1,5 @@
 <?php
-
+require_once(dirname(__FILE__) . "/../../../application/controllers/LayoutController.php");
 class Turbo_Controller_Action extends LayoutController
 {
 

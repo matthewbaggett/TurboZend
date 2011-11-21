@@ -921,7 +921,9 @@ class Turbo_Lib_Lessc {
 
 	// attempt to find block pointed at by path within search_in or its parent
 	function findBlock($search_in, $path) {
+		
 		if ($search_in == null) return null;
+		
 		$name = $path[0];
 
 		if (isset($search_in->children[$name])) {
