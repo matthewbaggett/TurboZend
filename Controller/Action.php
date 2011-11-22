@@ -11,15 +11,18 @@ class Turbo_Controller_Action extends LayoutController
         $mail->send();
 	}
 	private function _log_error($errors){
-		$oError = new Turbo_Model_Error();
-		$oError->strHost = $_SERVER['HTTP_HOST'];
-		$oError->strPath = $_SERVER['REQUEST_URI'];
-		$oError->dtmTime = date(MYSQL_DATE);
-		$oError->strException = $errors->exception;
-		$oError->strStackTrace = '';
-		$oError->strRequest = print_r($_REQUEST,true);
-		$oError->strServer = print_r($_SERVER,true);
-		$oError->save();
+		$tbl_errors = new Turbo_Model_DbTable_Errors();
+		$tbl_errors->insert(array(
+			'strHost' => $_SERVER['HTTP_HOST'],
+			'strPath' => $_SERVER['REQUEST_URI'],
+			'dtmTime' => date(MYSQL_DATE),
+			'strException' => $errors->exception,
+			'strStackTrace' => '',
+			'strRequest' => print_r($_REQUEST,true),
+			'strServer' => print_r($_SERVER,true),
+			'bolDeleted' => 0
+		));
+		
 	}
 	
     public function errorAction()
