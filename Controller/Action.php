@@ -10,6 +10,17 @@ class Turbo_Controller_Action extends LayoutController
         $mail->setBodyText($_SERVER['HTTP_HOST']. $_SERVER['REQUEST_URI'] . "\n\n" . $errors->exception."\n\n\$_SERVER:\n".print_r($_SERVER,true)."\n\n\$_REQUEST:\n".print_r($_REQUEST,true));
         $mail->send();
 	}
+	private function _log_error($errors){
+		$oError = new Turbo_Model_Error();
+		$oError->strHost = $_SERVER['HTTP_HOST'];
+		$oError->strPath = $_SERVER['REQUEST_URI'];
+		$oError->dtmTime = date(MYSQL_DATE);
+		$oError->strException = $errors->exception;
+		$oError->strStackTrace = '';
+		$oError->strRequest = print_r($_REQUEST,true);
+		$oError->strServer = print_r($_SERVER,true);
+		$oError->save();
+	}
 	
     public function errorAction()
     {
@@ -47,7 +58,8 @@ class Turbo_Controller_Action extends LayoutController
         	case (stripos($_SERVER['HTTP_USER_AGENT'],'Baiduspider') !== FALSE):
         		break;
         	default:
-        		$this->_send_error_email($errors);
+        		$this->_log_error($errors);
+        		//$this->_send_error_email($errors);
         }
         
         
