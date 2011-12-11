@@ -15,7 +15,7 @@ class Turbo_Controller_Action extends LayoutController
 		$tbl_errors->insert(array(
 			'strHost' => $_SERVER['HTTP_HOST'],
 			'strPath' => $_SERVER['REQUEST_URI'],
-			'dtmTime' => date(MYSQL_DATE),
+			'dtmTime' => date("Y-m-d H:i:s"),
 			'strException' => $errors->exception,
 			'strStackTrace' => '',
 			'strRequest' => print_r($_REQUEST,true),
