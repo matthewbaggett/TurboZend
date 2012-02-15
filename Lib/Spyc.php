@@ -136,7 +136,7 @@ class Turbo_Lib_Spyc {
      * @param string $input Path of YAML file or string containing YAML
      */
   public static function YAMLLoad($input) {
-    $Spyc = new Spyc;
+    $Spyc = new Turbo_Lib_Spyc;
     return $Spyc->__load($input);
   }
 
@@ -160,7 +160,7 @@ class Turbo_Lib_Spyc {
      * @param string $input String containing YAML
      */
   public static function YAMLLoadString($input) {
-    $Spyc = new Spyc;
+    $Spyc = new Turbo_Lib_Spyc;
     return $Spyc->__loadString($input);
   }
 
@@ -185,7 +185,7 @@ class Turbo_Lib_Spyc {
      * @param int $wordwrap Pass in 0 for no wordwrap, false for default (40)
      */
   public static function YAMLDump($array,$indent = false,$wordwrap = false) {
-    $spyc = new Spyc;
+    $spyc = new Turbo_Lib_Spyc;
     return $spyc->dump($array,$indent,$wordwrap);
   }
 
