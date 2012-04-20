@@ -49,7 +49,7 @@ class Turbo_Model_User extends Turbo_Db_Table_Row_Base{
 		$sel_setting = $tblUserSettings->select(true);
 		$sel_setting->where("intUserID = ?", $this->intUserID);
 		$sel_setting->where("strKey = ?", $key);
-		return $tblUserSettings->fetchOne($sel_setting);
+		return $tblUserSettings->fetch($sel_setting);
 	}
 	public function settingGet($key){
 		$oSetting = $this->settingFetch($key);
