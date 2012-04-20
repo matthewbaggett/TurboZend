@@ -9,7 +9,7 @@ class Turbo_Model_User extends Turbo_Db_Table_Row_Base{
 	/**
 	 * Throws out an object of the current user
 	 * 
-	 * @return Application_Model_User
+	 * @return Turbo_Model_User
 	 */
 	static public function getCurrentUser($return_anons = false){
 		if(Zend_Auth::getInstance()->hasIdentity()){
@@ -23,7 +23,7 @@ class Turbo_Model_User extends Turbo_Db_Table_Row_Base{
 	}
 	
 	static public function getUser($int_user_id){
-		$tbl_users = new Application_Model_DbTable_Users();
+		$tbl_users = new Turbo_Model_DbTable_Users();
 		return $tbl_users->fetchRow("intUserID = {$int_user_id}");
 	}
 	public function isLoggedInUserAdmin(){
@@ -36,62 +36,7 @@ class Turbo_Model_User extends Turbo_Db_Table_Row_Base{
 		}
 	}
 	
-	/*
-	 * Logic to get Favourite IMAGES
-	 */
-	public function getFavourites(){
-		$tbl_favourites = new Application_Model_DbTable_Favourites();
-		return $tbl_favourites->fetchAll("intUserID = {$this->intUserID}", 'intFavouriteID DESC');
-	}
-	public function getFavouritesArray(){
-		if(is_null($this->arr_favourite_ids)){
-			$arr_favourites = $this->getFavourites();
-			$this->arr_favourite_ids = array();
-			foreach($arr_favourites as $arr_favourite){
-				$this->arr_favourite_ids[] = $arr_favourite['intImageID'];
-			}
-		}
-		return $this->arr_favourite_ids;
-	}
-
-	/*
-	 * Logic to get Favourite TAGS
-	 */
-	public function getFavouriteTags(){
-		$tbl_favourite_tags = new Application_Model_DbTable_FavouriteTags();
-		return $tbl_favourite_tags->fetchAll("intUserID = {$this->intUserID}", 'intTagID DESC');
-	}
-	public function getFavouriteTagsArray(){
-		if(is_null($this->arr_favourite_tag_ids)){
-			$arr_favourite_tags = $this->getFavouriteTags();
-			$this->arr_favourite_tag_ids = array();
-			foreach($arr_favourite_tags as $arr_favourite_tag){
-				$this->arr_favourite_tag_ids[] = $arr_favourite_tag['intTagID'];
-			}
-		}
-		return $this->arr_favourite_tag_ids;
-	}
 	
-	/*
-	 * Logic to get seen images
-	 */
-	public function getSeenImages(){
-		$tbl_image_views = new Application_Model_DbTable_ImageViews();
-		$sel_seen = $tbl_image_views->select(true);
-		$sel_seen->where("intUserID = {$this->intUserID}");
-		$sel_seen->group('intImageID');
-		return $tbl_image_views->fetchAll($sel_seen);
-	}
-	public function getSeenImagesArray(){
-		if(is_null($this->arr_seen_image_ids)){
-			$arr_seen_images = $this->getSeenImages();
-			$this->arr_seen_image_ids = array();
-			foreach($arr_seen_images as $arr_seen_image){
-				$this->arr_seen_image_ids[] = $arr_seen_image['intImageID'];
-			}
-		}
-		return $this->arr_seen_image_ids;
-	}
 	static public function enforceLogin(){
 		if(!Zend_Auth::getInstance()->hasIdentity()){
 			header("Location: /Login");
