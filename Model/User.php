@@ -53,10 +53,11 @@ class Turbo_Model_User extends Turbo_Db_Table_Row_Base{
 	}
 	public function settingGet($key){
 		$oSetting = $this->settingFetch($key);
-		return $oSetting->strValue;
+		return unserialize($oSetting->strValue);
 	}
 	
 	public function settingSet($key, $value){
+		$value = serialize($value);
 		try{
 			$oSetting = $this->settingFetch($key);
 			if(!$oSetting){
