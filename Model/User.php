@@ -98,4 +98,35 @@ class Turbo_Model_User extends Turbo_Db_Table_Row_Base{
 			exit;
 		}
 	}
+	
+	public function settingFetch($key){
+		$tblUserSettings = new Turbo_Model_DbTable_UserSettings();
+		$sel_setting = $tblUserSettings->select(true);
+		$sel_setting->where("intUserID = ?", $this->intUserID);
+		$sel_setting->where("strKey = ?", $key);
+		return $tblUserSettings->fetchOne($sel_setting);
+	}
+	public function settingGet($key){
+		$oSetting = $this->settingFetch($key);
+		return $oSetting->strValue;
+	}
+	
+	public function settingSet($key, $value){
+		try{
+			$oSetting = $this->settingFetch($key);
+			if(!$oSetting){
+				$tblUserSettings = new Turbo_Model_DbTable_UserSettings();
+				$int_insert_id = $tblUserSettings->insert(array(
+						'intUserID' => $this->intUserID,
+						'strKey' => $key,
+						'strValue' => $value,
+						));
+				$oSetting = $this->settingFetch($key);
+			}
+			$oSetting->strValue = $value;
+			return TRUE;
+		}catch(Exception ($e)){
+			return FALSE;
+		}
+	}
 }
