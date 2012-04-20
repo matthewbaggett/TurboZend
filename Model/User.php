@@ -125,7 +125,7 @@ class Turbo_Model_User extends Turbo_Db_Table_Row_Base{
 			}
 			$oSetting->strValue = $value;
 			return TRUE;
-		}catch(Exception ($e)){
+		}catch(Exception $e){
 			return FALSE;
 		}
 	}
