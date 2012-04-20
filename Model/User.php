@@ -6,6 +6,7 @@ class Turbo_Model_User extends Turbo_Db_Table_Row_Base{
 	protected $arr_favourite_ids = null;
 	
 	const ANONYMOUS_USER_ID = -2;
+	
 	/**
 	 * Throws out an object of the current user
 	 * 
@@ -26,6 +27,7 @@ class Turbo_Model_User extends Turbo_Db_Table_Row_Base{
 		$tbl_users = new Turbo_Model_DbTable_Users();
 		return $tbl_users->fetchRow("intUserID = {$int_user_id}");
 	}
+	
 	public function isLoggedInUserAdmin(){
 		switch($this->enumLevel){
 			case 'superadmin':
@@ -35,7 +37,6 @@ class Turbo_Model_User extends Turbo_Db_Table_Row_Base{
 				return FALSE;
 		}
 	}
-	
 	
 	static public function enforceLogin(){
 		if(!Zend_Auth::getInstance()->hasIdentity()){
@@ -51,6 +52,7 @@ class Turbo_Model_User extends Turbo_Db_Table_Row_Base{
 		$sel_setting->where("strKey = ?", $key);
 		return $tblUserSettings->fetchRow($sel_setting);
 	}
+	
 	public function settingGet($key){
 		$oSetting = $this->settingFetch($key);
 		return unserialize($oSetting->strValue);
