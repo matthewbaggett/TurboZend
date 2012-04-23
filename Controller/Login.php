@@ -136,6 +136,10 @@ class Turbo_Controller_Login extends Zend_Controller_Action
 	    	unset($new_user_email);
     	}
     }
+    
+    private function _login_redirect(){
+    	$this->_helper->redirector('index', 'index');
+    }
 
     public function init()
     {
@@ -150,7 +154,7 @@ class Turbo_Controller_Login extends Zend_Controller_Action
 			if ($form->isValid($request->getPost())) {
 				if ($this->_process_login($form->getValues())) {
 					// We're authenticated! Redirect to the home page
-					$this->_helper->redirector('index', 'index');
+					$this->_login_redirect();
 				}
 			}
 		}
