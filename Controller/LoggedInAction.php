@@ -7,5 +7,6 @@ class Turbo_Controller_LoggedInAction extends Turbo_Controller_Action{
 			header("Location: /Login");
 			exit;
 		}
+		return parent::__construct($request,$response,$invokeArgs);
 	}
 }
