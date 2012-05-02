@@ -137,7 +137,7 @@ class Turbo_Controller_Login extends Zend_Controller_Action
     	}
     }
     
-    private function _login_redirect(){
+    protected function _login_redirect(){
     	$this->_helper->redirector('index', 'index');
     }
 
