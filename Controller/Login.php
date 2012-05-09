@@ -179,9 +179,9 @@ class Turbo_Controller_Login extends Zend_Controller_Action
          }
          $this->view->form = $form;
     }
-    public function welcomeAction(){
-    	
-    }
+    
+    public function welcomeAction(){}
+    public function activatedAction(){}
     
     public function activationAction(){
     	$str_activation_key = $this->_getParam('key');
@@ -202,7 +202,7 @@ class Turbo_Controller_Login extends Zend_Controller_Action
     		unset($activated_user_email);
     	}
     	
-    	$this->_helper->redirector('index', 'Login');
+    	$this->_helper->redirector('activated', 'Login');
     }
 
 
