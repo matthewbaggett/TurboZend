@@ -119,10 +119,10 @@ class Turbo_Controller_Login extends Zend_Controller_Action
     	
     	$welcome_email = new Zend_Mail();
     	$welcome_email->addTo($obj_user->strEmail);
-    	$welcome_email->setSubject("Welcome to Bunnehbutt, {$obj_user->strUsername}!");
+    	$welcome_email->setSubject("Welcome to Gamitude, {$obj_user->strUsername}!");
     	
     	$activation_url = "http://" . $_SERVER['SERVER_NAME'] . $this->view->url(array('controller' => 'Login', 'action' => 'activation', 'key' => $str_activation_key),null,true);
-    	$welcome_email->setBodyText("Hey {$obj_user->strUsername}! Your account is one step away from activation!\n\n You can activate your account by clicking here: {$activation_url}\n\nToodles!\n\n - Boris");
+    	$welcome_email->setBodyText("Hey {$obj_user->strUsername}! Your account is one step away from activation!\n\n You can activate your account by clicking here: {$activation_url}\n\nToodles!\n\n -- Pilot");
     	$welcome_email->send();
     	
     	// Get all the admin email addresses, send them a "new user!" email
@@ -190,6 +190,18 @@ class Turbo_Controller_Login extends Zend_Controller_Action
     	//print_r($obj_user);exit;
     	$obj_user->enumActive = 'active';
     	$obj_user->save();
+    	
+    	// Get all the admin email addresses, send them an "activated user!" email
+    	$arr_admin_users = $tbl_users->fetchAll(array("enumActive = 'active'","enumLevel IN ('admin','superadmin')"));
+    	foreach($arr_admin_users as $obj_admin_user){
+    		$activated_user_email = new Zend_Mail();
+    		$activated_user_email->addTo($obj_admin_user->strEmail);
+    		$activated_user_email->setSubject("New user activated: {$obj_user->strUsername}!");
+    		$activated_user_email->setBodyText(implode("\n",$obj_user));
+    		$activated_user_email->send();
+    		unset($activated_user_email);
+    	}
+    	
     	$this->_helper->redirector('index', 'Login');
     }
 
