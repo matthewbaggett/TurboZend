@@ -6,8 +6,9 @@ class Turbo_Lib_Browser{
 	 * @param string $url
 	 * @return phpQueryObject
 	 */
-	function get($url){
+	static function get($url){
 		return phpQuery::browserGet('http://www.google.com/', function($browser){ 
+			var_dump($browser);
 			return $browser; 
 		});
 	}
