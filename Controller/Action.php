@@ -7,8 +7,8 @@ class Turbo_Controller_Action extends LayoutController
 		parent::init();
 		$this->instance_id = $this->_get_new_instance_id();
 	}
-	protected function _get_new_instance_id($strength=16) {
-		$length = 10;
+	protected function _get_new_instance_id($length = 10) {
+		
 		$vowels = 'aeuybdghjmnpqrstvzBDGHJLMNPQRSTVWXZAEU---';
 		$password = '';
 		$alt = time() % 2;
