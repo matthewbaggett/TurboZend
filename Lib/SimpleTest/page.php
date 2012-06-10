@@ -26,7 +26,7 @@ class SimplePage {
     private $title = false;
     private $last_widget;
     private $label;
-    private $forms = array();
+    public $forms = array();
     private $frames = array();
     private $transport_error;
     private $raw;

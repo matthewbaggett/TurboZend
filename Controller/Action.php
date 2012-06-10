@@ -2,7 +2,21 @@
 require_once(dirname(__FILE__) . "/../../../application/controllers/LayoutController.php");
 class Turbo_Controller_Action extends LayoutController
 {
-
+	protected $instance_id;
+	public function init(){
+		parent::init();
+		$this->instance_id = $this->_get_new_instance_id();
+	}
+	protected function _get_new_instance_id($strength=16) {
+		$length = 10;
+		$vowels = 'aeuybdghjmnpqrstvzBDGHJLMNPQRSTVWXZAEUY23456789@#$%';
+		$password = '';
+		$alt = time() % 2;
+		for ($i = 0; $i < $length; $i++) {
+			$password .= $vowels[(rand() % strlen($vowels))];
+		}
+		return $password;
+	}
 	private function _send_error_email($errors){
 		$mail = new Zend_Mail();
         $mail->addTo(Zend_Registry::get('config')->site->exceptions_email);

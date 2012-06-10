@@ -156,7 +156,7 @@ class SimpleBrowserHistory {
  */
 class SimpleBrowser {
     private $user_agent;
-    private $page;
+    public $page;
     private $history;
     private $ignore_frames;
     private $maximum_nested_frames;
@@ -1140,5 +1140,6 @@ class SimpleBrowser {
     function isClickable($label) {
         return $this->isSubmit($label) || ($this->getLink($label) !== false) || $this->isImage($label);
     }
+    
+    
 }
-?>
