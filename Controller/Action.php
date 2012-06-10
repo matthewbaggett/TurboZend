@@ -9,7 +9,7 @@ class Turbo_Controller_Action extends LayoutController
 	}
 	protected function _get_new_instance_id($strength=16) {
 		$length = 10;
-		$vowels = 'aeuybdghjmnpqrstvzBDGHJLMNPQRSTVWXZAEUY23456789@#$%';
+		$vowels = 'aeuybdghjmnpqrstvzBDGHJLMNPQRSTVWXZAEU---';
 		$password = '';
 		$alt = time() % 2;
 		for ($i = 0; $i < $length; $i++) {
