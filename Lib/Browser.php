@@ -1,6 +1,7 @@
 <?php
 require_once(dirname(__FILE__) . "/SimpleTest/browser.php") ;
-require_once(dirname(__FILE__) . "/SimpleHtmlDom/simple_html_dom.php")
+require_once(dirname(__FILE__) . "/SimpleHtmlDom/simple_html_dom.php");
+
 class Turbo_Lib_Browser{
 	
 	/**
