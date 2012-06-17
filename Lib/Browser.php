@@ -14,11 +14,16 @@ class Turbo_Lib_Browser{
 		return $browser;
 	}
 	
+	/**
+	 * Feed a SimpleBrowser to this static class, get a simple_html_dom back
+	 * @param SimpleBrowser $browser
+	 * @return simple_html_dom
+	 */
 	static function getParsableContent(SimpleBrowser $browser){
-		$shd = new simple_html_dom();
+		$page = new simple_html_dom();
 		$rawhtml = $browser->getContent();
 		
-		$page = $shd->load($rawhtml);
+		$page->load($rawhtml);
 		return $page;
 	}
 	
