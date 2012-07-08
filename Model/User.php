@@ -53,16 +53,27 @@ class Turbo_Model_User extends Turbo_Db_Table_Row_Base{
 		return $tblUserSettings->fetchRow($sel_setting);
 	}
 	
-	public function settingGet($key){
+	public function settingGet($key, $max_age_sec = -1){
 		$oSetting = $this->settingFetch($key);
 		if(!is_object($oSetting)){
 			return FALSE;
 		}
-		return unserialize($oSetting->strValue);
+		$max_age_timestamp = time() - $max_age_sec;
+		if(strtotime($oSetting->dtmSaved) >= $max_age_timestamp || $max_age_sec < 0){
+			$decoded = base64_decode($oSetting->strValue);
+			$unserialized = unserialize($decoded);
+			if($unserialized == false){
+				throw new exception("Could not unserialize this setting: {$oSetting->intUserSettingID} {$oSetting->strKey}: {$oSetting->strValue}");
+			}
+			return $unserialized;
+		}else{
+			// TOO OLD >:|
+			return FALSE;
+		}
 	}
 	
 	public function settingSet($key, $value){
-		$value = serialize($value);
+		$value = base64_encode(serialize($value));
 		try{
 			$oSetting = $this->settingFetch($key);
 			if(!$oSetting){
@@ -75,6 +86,7 @@ class Turbo_Model_User extends Turbo_Db_Table_Row_Base{
 				$oSetting = $this->settingFetch($key);
 			}
 			$oSetting->strValue = $value;
+			$oSetting->dtmSaved = date("Y-m-d H:i:s");
 			$oSetting->save();
 			return TRUE;
 		}catch(Exception $e){
