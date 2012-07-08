@@ -75,6 +75,7 @@ class Turbo_Model_User extends Turbo_Db_Table_Row_Base{
 				$oSetting = $this->settingFetch($key);
 			}
 			$oSetting->strValue = $value;
+			$oSetting->save();
 			return TRUE;
 		}catch(Exception $e){
 			return FALSE;
