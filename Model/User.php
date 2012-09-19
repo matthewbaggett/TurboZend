@@ -63,7 +63,7 @@ class Turbo_Model_User extends Turbo_Db_Table_Row_Base{
 			$decoded = base64_decode($oSetting->strValue);
 			$unserialized = unserialize($decoded);
 			if($unserialized == false){
-				throw new exception("Could not unserialize this setting: {$oSetting->intUserSettingID} {$oSetting->strKey}: {$oSetting->strValue}");
+				//throw new exception("Could not unserialize this setting: {$oSetting->intUserSettingID} {$oSetting->strKey}: {$oSetting->strValue}");
 			}
 			return $unserialized;
 		}else{
