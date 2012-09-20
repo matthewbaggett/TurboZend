@@ -60,8 +60,7 @@ class Turbo_Model_User extends Turbo_Db_Table_Row_Base{
 		}
 		$max_age_timestamp = time() - $max_age_sec;
 		if(strtotime($oSetting->dtmSaved) >= $max_age_timestamp || $max_age_sec < 0){
-			$decoded = base64_decode($oSetting->strValue);
-			$unserialized = unserialize($decoded);
+			$unserialized = json_decode($oSetting->strValue);
 			if($unserialized == false){
 				//throw new exception("Could not unserialize this setting: {$oSetting->intUserSettingID} {$oSetting->strKey}: {$oSetting->strValue}");
 			}
@@ -73,7 +72,7 @@ class Turbo_Model_User extends Turbo_Db_Table_Row_Base{
 	}
 	
 	public function settingSet($key, $value){
-		$value = base64_encode(serialize($value));
+		$value = json_encode($value);
 		try{
 			$oSetting = $this->settingFetch($key);
 			if(!$oSetting){
