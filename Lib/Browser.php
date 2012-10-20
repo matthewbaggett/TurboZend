@@ -9,7 +9,7 @@ class Turbo_Lib_Browser{
 	 * @return phpQueryObject
 	 */
 	static function get($url){
-		$browser = &new SimpleBrowser();
+		$browser = new SimpleBrowser();
 		$browser->get($url);
 		return $browser;
 	}
