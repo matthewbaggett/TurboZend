@@ -4,13 +4,17 @@ class Turbo_Db_Table_Row_Base extends Zend_Db_Table_Row_Abstract{
 	
 	const MYSQL_DATETIME = "Y-m-d H:i:s";
 	
-	public function toXML(){
+
+	
+	public function toXML($extra_xml = null){
 		$arr_name_elements = explode("_",get_class($this));
 		$str_singular = end($arr_name_elements);
 		$str_xml = "<{$str_singular}>\n";
 		foreach($this->toArray() as $key => $value){
 			$str_xml.= "<{$key}>{$value}</{$key}>\n";
 		}
+		if($extra_xml)
+			$str_xml.=$extra_xml;
 		$str_xml.= "</{$str_singular}>\n";
 		return $str_xml;
 	}

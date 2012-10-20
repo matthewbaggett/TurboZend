@@ -25,4 +25,14 @@ class Turbo_Utils{
         }
         else return date($format, $int_timestamp);
 	}
+	public function curl($url){
+		$ch = curl_init();
+		curl_setopt($ch, CURLOPT_URL, $url);
+		curl_setopt($ch, CURLOPT_HEADER, FALSE);
+		curl_setopt($ch, CURLOPT_NOBODY, FALSE); // remove body
+		curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
+		$response = curl_exec($ch);
+		curl_close($ch);
+		return $response;
+	}
 }
